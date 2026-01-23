@@ -1,91 +1,141 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
+import ProjectFocusChart from "@/components/ProjectFocusChart";
+import ProgressionChart from "@/components/ProgressionChart";
+import TypingCharacter from "@/components/TypingCharacter";
+import { experiences } from "@/data/resume";
+import RetroWindow from "@/components/RetroWindow";
+import GlitchText from "@/components/GlitchText";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center">
-      {/* Hero Section */}
-      <section className="w-full bg-white py-20 sm:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 tracking-tight mb-6">
-            Bridging the gap between <br className="hidden sm:block" />
-            <span className="text-blue-600">Data Science</span> and{" "}
-            <span className="text-purple-600">Product Design</span>
-          </h1>
-          <p className="mt-4 text-xl text-gray-500 max-w-2xl mx-auto">
-            I craft data-driven products with a focus on user experience. 
-            Transforming complex insights into intuitive designs.
+    <div className="min-h-screen p-4 sm:p-8 font-retro overflow-hidden relative">
+      
+      {/* Background Decorative Elements */}
+      <div className="fixed top-10 left-10 text-retro-pink/20 text-9xl pointer-events-none select-none z-0 opacity-10">
+        INGRID
+      </div>
+      
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6 relative z-10">
+        
+        {/* HEADER / TITLE */}
+        <div className="lg:col-span-12 mb-8 text-center">
+          <GlitchText text="Hello, I'm Ingrid" className="text-6xl md:text-8xl font-bold text-retro-blue drop-shadow-[4px_4px_0px_rgba(255,255,255,1)]" />
+          <p className="text-xl md:text-2xl mt-2 text-retro-darker bg-white/50 inline-block px-2">
+            Solving consumer problems with predictive modeling & product analytics.
           </p>
-          <div className="mt-10 flex justify-center gap-4">
-            <Link
-              href="/projects"
-              className="rounded-md bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            >
-              View My Work
-            </Link>
-            <Link
-              href="/about"
-              className="rounded-md bg-white px-8 py-3 text-base font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            >
-              About Me
-            </Link>
-          </div>
         </div>
-      </section>
 
-      {/* Skills / Interests Section */}
-      <section className="w-full bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              What I Do
-            </h2>
-            <p className="mt-4 text-lg text-gray-500">
-              Combining analytical rigor with creative problem solving.
-            </p>
+        {/* LEFT COLUMN: Main Profile & Status */}
+        <div className="md:col-span-1 lg:col-span-5 space-y-4 sm:space-y-6">
+          <RetroWindow title="Profile.exe" className="h-auto">
+             <div className="flex flex-col items-center bg-white p-4 border-2 border-retro-dark shadow-inner">
+          <div className="w-64 h-64 mx-auto bg-retro-light border border-retro-dark mb-4 flex items-center justify-center relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-retro-pink via-lf-lavender to-lf-purple opacity-50"></div>
+                 <div className="w-52 h-52 mx-auto flex items-center justify-center relative overflow-hidden group bg-transparent border-none shadow-none">
+                   <TypingCharacter />
+                 </div>
+                 <div className="absolute top-2 left-2 text-xs bg-retro-blue text-white px-1">PREVIEW</div>
+               </div>
+               <h2 className="text-2xl font-bold mb-2">Ingrid Yeung</h2>
+               <p className="text-center text-retro-darker mb-4">
+                 Junior at Northwestern University, majoring in Computer Science, Data Science and Statistics.
+               </p>
+               <div className="flex gap-2 w-full">
+                 <Link href="/dance" className="flex-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker py-2 text-center active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light hover:bg-retro-light/50">
+                   Dance
+                 </Link>
+                 <Link href="/projects" className="flex-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker py-2 text-center active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light hover:bg-retro-light/50">
+                   Projects
+                 </Link>
+               </div>
+             </div>
+          </RetroWindow>
+
+          <RetroWindow title="Fun_Fact.txt">
+             <div className="bg-white p-4 border border-retro-dark h-full text-lg leading-relaxed text-gray-800">
+               <p className="mb-4">
+                 I am really passionate about the technical side of data—predictive modeling, building dashboards, engineering features—but I’m most excited when I can use those skills to solve real-world consumer problems and generate more product insights.
+               </p>
+               <p className="mb-4">
+                 My experience has been a mix of rigorous engineering and business strategy, especially through my time at Pixocial where I focused heavily on product analytics, A/B testing, and dashboard reporting to help product teams make better decisions.
+               </p>
+               <p className="mb-4">
+                 Outside of academics, I am very passionate about dancing and choreography, and I have choreographed several pieces for Northwestern's dance teams.
+               </p>
+               <div className="mt-4 pt-4 border-t border-dashed border-gray-400">
+                 <p className="mb-1"><span className="text-retro-blue font-bold">PASSION:</span> Choreography & Performance, concerts, music, half marathon</p>
+               </div>
+             </div>
+          </RetroWindow>
+        </div>
+
+        {/* MIDDLE / RIGHT COLUMN: Experience & Data */}
+        <div className="md:col-span-1 lg:col-span-7 space-y-4 sm:space-y-6">
+          
+          {/* Experience Window */}
+          <RetroWindow title="Experience_Log.doc" headerClassName="bg-retro-pink text-white">
+             <div className="bg-white p-4 h-auto sm:h-96 lg:h-[500px] overflow-y-auto custom-scrollbar border border-retro-dark">
+                {experiences.map((exp, i) => (
+                  <div key={exp.id} className="mb-6 last:mb-0 border-b border-dashed border-gray-300 pb-4 last:border-0">
+                    <h3 className="text-xl font-bold text-retro-blue">{exp.company}</h3>
+                    <div className="flex justify-between text-sm text-gray-500 mb-1 font-sans">
+                      <span className="font-bold text-retro-darker">{exp.role}</span>
+                      <span>{exp.period}</span>
+                    </div>
+                    <p className="text-base leading-tight font-sans text-gray-700">{exp.description[0]}</p>
+                  </div>
+                ))}
+                <Link href="/Yeung_Ingrid.pdf" target="_blank" rel="noopener noreferrer" className="block text-center mt-4 text-retro-blue hover:bg-retro-blue hover:text-white border border-retro-blue p-1">
+                  [ VIEW RESUME ]
+                </Link>
+             </div>
+          </RetroWindow>
+
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
+             {/* Skills */}
+             <RetroWindow title="Toolbox.bmp">
+                <div className="bg-white p-2 border border-retro-dark h-full flex flex-wrap content-start gap-2">
+                   {["Python", "Pandas", "Numpy", "SQL", "React", "A/B Testing", "Tableau", "Looker Studio", "Git", "Jupyter", "Experiment Design", "ML modeling"].map(skill => (
+                       <span key={skill} className="px-2 py-1 bg-retro-gray border border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker text-sm hover:bg-retro-pink hover:text-white cursor-pointer active:translate-y-px">
+                           {skill}
+                       </span>
+                   ))}
+                </div>
+             </RetroWindow>
+
+             {/* Charts */}
+             {/* Removed Growth_Metrics.xls / ProgressionChart as requested */}
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Data Science</h3>
-              <p className="text-gray-500">
-                Exploratory data analysis, machine learning models, and statistical inference to uncover hidden patterns.
-              </p>
-            </div>
+           {/* Creative Mix */}
+           <RetroWindow title="Creative_Mix.pie">
+                <div className="bg-white p-4 border border-retro-dark">
+                   <ProjectFocusChart />
+                </div>
+           </RetroWindow>
 
-            {/* Card 2 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6 text-purple-600">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Product Design</h3>
-              <p className="text-gray-500">
-                User research, wireframing, and prototyping to build products that solve real user needs.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-6 text-pink-600">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Frontend Dev</h3>
-              <p className="text-gray-500">
-                Bringing designs to life with React, Next.js, and interactive data visualizations.
-              </p>
-            </div>
-          </div>
         </div>
-      </section>
+
+      </div>
+      
+      {/* Taskbar (Fixed Bottom) */}
+      <div className="fixed bottom-0 left-0 w-full h-10 bg-[#C0C0C0] border-t-2 border-retro-light flex items-center px-2 gap-2 z-50">
+         <button className="flex items-center gap-1 px-2 py-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light font-bold">
+            <span className="w-4 h-4 bg-gradient-to-r from-red-500 to-yellow-500 rounded-sm inline-block"></span>
+            START
+         </button>
+         <div className="h-6 w-[2px] bg-gray-400 mx-1"></div>
+         <div className="flex-1 bg-white h-6 border-b border-white border-r-white border-t-gray-600 border-l-gray-600 shadow-inner px-2 flex items-center">
+            <span className="text-xs">Welcome to Ingrid's Portfolio v2.0</span>
+         </div>
+         <div className="px-2 py-1 border border-gray-400 shadow-inner bg-retro-gray text-xs">
+            12:00 PM
+         </div>
+      </div>
+
     </div>
   );
 }
