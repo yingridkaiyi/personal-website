@@ -85,16 +85,17 @@ export default function DancePage() {
                       </div>
                     ) : piece.videoType === 'instagram' ? (
                       <div className="flex justify-center">
-                        <iframe
-                          src={piece.videoUrl}
-                          width="100%"
-                          maxWidth="500"
-                          height="600"
-                          frameBorder="0"
-                          scrolling="no"
-                          allowTransparency
-                          title={piece.title}
-                        ></iframe>
+                        <div style={{ maxWidth: "500px", width: "100%" }}>
+                          <iframe
+                            src={piece.videoUrl}
+                            width="100%"
+                            height="600"
+                            frameBorder="0"
+                            scrolling="no"
+                            allowTransparency
+                            title={piece.title}
+                          ></iframe>
+                        </div>
                       </div>
                     ) : (
                       <video
