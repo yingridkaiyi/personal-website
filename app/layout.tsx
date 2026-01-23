@@ -21,8 +21,11 @@ const vt323 = VT323({
 });
 
 export const metadata: Metadata = {
-  title: "Data Science & Product Portfolio",
+  title: "Ingrid's personal website",
   description: "A portfolio showcasing the intersection of Data Science and Product Design.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

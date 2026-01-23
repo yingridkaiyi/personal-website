@@ -11,7 +11,7 @@ import GlitchText from "@/components/GlitchText";
 
 export default function Home() {
   return (
-    <div className="min-h-screen p-4 sm:p-8 font-retro overflow-hidden relative">
+    <div className="min-h-screen p-4 sm:p-8 font-retro overflow-hidden relative" style={{ backgroundColor: "#EAE0F5" }}>
       
       {/* Background Decorative Elements */}
       <div className="fixed top-10 left-10 text-retro-pink/20 text-9xl pointer-events-none select-none z-0 opacity-10">
@@ -24,7 +24,7 @@ export default function Home() {
         <div className="lg:col-span-12 mb-8 text-center">
           <GlitchText text="Hello, I'm Ingrid" className="text-6xl md:text-8xl font-bold text-retro-blue drop-shadow-[4px_4px_0px_rgba(255,255,255,1)]" />
           <p className="text-xl md:text-2xl mt-2 text-retro-darker bg-white/50 inline-block px-2">
-            Solving consumer problems with predictive modeling & product analytics.
+            Student at Northwestern University aspiring to become a data scientist. Always seeking opportunities to create user centric solution through predictive model & product analytics.
           </p>
         </div>
 
@@ -44,11 +44,11 @@ export default function Home() {
                  Junior at Northwestern University, majoring in Computer Science, Data Science and Statistics.
                </p>
                <div className="flex gap-2 w-full">
-                 <Link href="/dance" className="flex-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker py-2 text-center active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light hover:bg-retro-light/50">
-                   Dance
+                 <Link href="mailto:ingridyeung2027@u.northwestern.edu" className="flex-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker py-2 text-center active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light hover:bg-retro-light/50">
+                   Email
                  </Link>
-                 <Link href="/projects" className="flex-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker py-2 text-center active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light hover:bg-retro-light/50">
-                   Projects
+                 <Link href="https://www.linkedin.com/in/ingridkaiyiyeung/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker py-2 text-center active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light hover:bg-retro-light/50">
+                   LinkedIn
                  </Link>
                </div>
              </div>
@@ -122,16 +122,16 @@ export default function Home() {
       </div>
       
       {/* Taskbar (Fixed Bottom) */}
-      <div className="fixed bottom-0 left-0 w-full h-10 bg-[#C0C0C0] border-t-2 border-retro-light flex items-center px-2 gap-2 z-50">
-         <button className="flex items-center gap-1 px-2 py-1 bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light font-bold">
+      <div className="fixed bottom-0 left-0 w-full h-10 bg-[#E8C0FF] border-t-2 border-retro-light flex items-center px-2 gap-2 z-50">
+         <button className="flex items-center gap-1 px-2 py-1 bg-[#E8C0FF] border-2 border-t-retro-light border-l-retro-light border-b-[#9B6BBB] border-r-[#9B6BBB] active:border-t-[#9B6BBB] active:border-l-[#9B6BBB] active:border-b-retro-light active:border-r-retro-light font-bold">
             <span className="w-4 h-4 bg-gradient-to-r from-red-500 to-yellow-500 rounded-sm inline-block"></span>
             START
          </button>
-         <div className="h-6 w-[2px] bg-gray-400 mx-1"></div>
-         <div className="flex-1 bg-white h-6 border-b border-white border-r-white border-t-gray-600 border-l-gray-600 shadow-inner px-2 flex items-center">
+         <div className="h-6 w-[2px] bg-[#9B6BBB] mx-1"></div>
+         <div className="flex-1 bg-white h-6 border-b border-white border-r-white border-t-[#9B6BBB] border-l-[#9B6BBB] shadow-inner px-2 flex items-center">
             <span className="text-xs">Welcome to Ingrid's Portfolio v2.0</span>
          </div>
-         <div className="px-2 py-1 border border-gray-400 shadow-inner bg-retro-gray text-xs">
+         <div className="px-2 py-1 border border-[#9B6BBB] shadow-inner bg-[#E8C0FF] text-xs">
             12:00 PM
          </div>
       </div>

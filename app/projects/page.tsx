@@ -2,7 +2,7 @@ import { projects } from "@/data/projects";
 
 export default function ProjectsPage() {
   return (
-    <div className="bg-white/80 py-16 sm:py-24">
+    <div className="min-h-screen py-16 sm:py-24" style={{ backgroundColor: "#EAE0F5" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -25,7 +25,7 @@ export default function ProjectsPage() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#FFD700] text-[#4A1B5C] font-bold border-2 border-[#9B6BBB]"
                       >
                         {tag}
                       </span>

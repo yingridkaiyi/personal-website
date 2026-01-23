@@ -14,16 +14,21 @@ export default {
         mono: ["var(--font-geist-mono)", "monospace"],
       },
       colors: {
-        background: "#F5D5E3", // Dusty rose background from reference
+        background: "#F5D5E3",
         foreground: "#4a4a4a",
-        // Retro/Vaporwave Palette
-        "retro-gray": "#C0C0C0",
+        // Retro/Vaporwave Palette - Pink/Purple/Yellow Theme
+        "retro-gray": "#E8C0FF", // Soft lavender/purple
         "retro-light": "#FFFFFF",
-        "retro-dark": "#808080",
-        "retro-darker": "#000000",
-        "retro-blue": "#000080",
-        "retro-pink": "#FF69B4",
-        // Keep existing colors for compatibility if needed, but we'll transition away
+        "retro-dark": "#9B6BBB", // Purple
+        "retro-darker": "#4A1B5C", // Dark purple
+        "retro-blue": "#6B2E8F", // Deep purple
+        "retro-pink": "#FF69B4", // Hot pink
+        // Vaporwave colors
+        "vp-pink": "#FF69B4",
+        "vp-purple": "#B366CC",
+        "vp-lavender": "#E8C0FF",
+        "vp-yellow": "#FFD700",
+        "vp-cream": "#FFF5D9",
         "lf-cream": "#FDFBD4",
         "lf-green": "#BDB96A",
         "lf-lavender": "#C1BFFF",

@@ -11,46 +11,50 @@ interface DanceItem {
   date: string;
   videoUrl?: string;
   imageUrl?: string;
+  videoType?: 'youtube' | 'embed' | 'instagram'; // 'youtube' for YouTube, 'embed' for video files, 'instagram' for Instagram posts
 }
 
 const danceItems: DanceItem[] = [
   {
     id: 1,
-    title: "Contemporary Fusion",
-    description: "A piece exploring the intersection of contemporary and hip-hop movement vocabulary. This choreography focuses on fluidity and sharp accents.",
-    styles: ["Contemporary", "Hip-Hop"],
-    date: "2024",
-    imageUrl: "/dance1.jpg"
+    title: "Choreography - Walk it Out",
+    description: "Choreographed for Refresh Dance Crew Spring show 2025.",
+    styles: ["Hip-Hop"],
+    date: "2025",
+    videoUrl: "https://www.instagram.com/p/DNnpHYQSOig/embed/",
+    videoType: 'instagram'
   },
   {
     id: 2,
-    title: "Urban Stories",
-    description: "An ensemble piece telling stories of city life through movement. Collaborated with dancers to bring authentic urban narrative to the stage.",
-    styles: ["Hip-Hop", "Street Jazz"],
-    date: "2024",
-    imageUrl: "/dance2.jpg"
+    title: "Choreography - Humble",
+    description: "Choreographed for Northwestern's biggest annual dance show - Refusionshaka 2025.",
+    styles: ["Hip-Hop", "Hardhitting"],
+    date: "2025",
+    videoUrl: "https://www.instagram.com/p/DTGVKYxEUg4/embed/",
+    videoType: 'instagram'
   },
   {
     id: 3,
-    title: "Abstract Emotions",
-    description: "Solo choreography exploring emotional expression through abstract movement. Inspired by personal experiences and artistic growth.",
-    styles: ["Contemporary", "Modern"],
-    date: "2023",
-    imageUrl: "/dance3.jpg"
-  },
-  {
-    id: 4,
-    title: "Ensemble Harmony",
-    description: "A synchronous group piece emphasizing unity and connection. Features intricate formations and collective energy.",
-    styles: ["Contemporary", "Fusion"],
-    date: "2023",
-    imageUrl: "/dance4.jpg"
+    title: "Open Class - Honest",
+    description: "Choreographed with a partner and taught a class to the general school public",
+    styles: ["Chill", "Hip Hop"],
+    date: "2025",
+    videoUrl: "https://www.instagram.com/p/DKIq0r2Oq52/embed/",
+    videoType: 'instagram'
   }
+  // {
+  //   id: 4,
+  //   title: "Ensemble Harmony",
+  //   description: "A synchronous group piece emphasizing unity and connection. Features intricate formations and collective energy.",
+  //   styles: ["Contemporary", "Fusion"],
+  //   date: "2023",
+  //   imageUrl: "/dance4.jpg"
+  // }
 ];
 
 export default function DancePage() {
   return (
-    <div className="min-h-screen p-4 sm:p-8 font-retro overflow-hidden relative bg-white/80 py-16 sm:py-24">
+    <div className="min-h-screen p-4 sm:p-8 font-retro overflow-hidden relative py-16 sm:py-24" style={{ backgroundColor: "#EAE0F5" }}>
       <div className="max-w-7xl mx-auto relative z-10">
         {/* HEADER */}
         <div className="mb-16 text-center">
@@ -67,14 +71,50 @@ export default function DancePage() {
           {danceItems.map((piece) => (
             <RetroWindow key={piece.id} title={piece.title}>
               <div className="bg-white p-4 border border-retro-dark h-full">
-                {piece.imageUrl && (
+                {piece.videoUrl ? (
+                  <div className="w-full mb-4">
+                    {piece.videoType === 'youtube' ? (
+                      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                        <iframe
+                          className="absolute top-0 left-0 w-full h-full border border-retro-dark"
+                          src={piece.videoUrl}
+                          title={piece.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    ) : piece.videoType === 'instagram' ? (
+                      <div className="flex justify-center">
+                        <iframe
+                          src={piece.videoUrl}
+                          width="100%"
+                          maxWidth="500"
+                          height="600"
+                          frameBorder="0"
+                          scrolling="no"
+                          allowTransparency
+                          title={piece.title}
+                        ></iframe>
+                      </div>
+                    ) : (
+                      <video
+                        className="w-full border border-retro-dark bg-black"
+                        controls
+                        controlsList="nodownload"
+                      >
+                        <source src={piece.videoUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    )}
+                  </div>
+                ) : piece.imageUrl ? (
                   <div className="w-full h-48 bg-retro-gray border border-retro-dark mb-4 flex items-center justify-center">
                     <div className="text-center text-gray-500">
                       <p className="text-sm">[Photo placeholder]</p>
                       <p className="text-xs">{piece.title}</p>
                     </div>
                   </div>
-                )}
+                ) : null}
                 <p className="text-base text-gray-800 mb-4 leading-relaxed">
                   {piece.description}
                 </p>
@@ -100,15 +140,11 @@ export default function DancePage() {
               Dance has always been my creative outlet and way to express emotions that data can't quite capture. Through choreography, I explore movement, storytelling, and the connection between physicality and emotion.
             </p>
             <p className="mb-4">
-              My style is eclectic—blending contemporary, hip-hop, and experimental movement into pieces that feel authentic and push my own boundaries as an artist. I believe in collaborative creation and love working with other dancers to bring visions to life.
-            </p>
-            <p className="mb-4">
               Whether performing on stage or creating in the studio, dance keeps me grounded and reminds me that not everything needs to be quantified to be meaningful.
             </p>
             <div className="mt-6 pt-6 border-t border-dashed border-gray-400">
-              <p className="mb-2"><span className="text-retro-blue font-bold">TRAINING:</span> Contemporary, Jazz, Hip-Hop, Improv</p>
-              <p className="mb-2"><span className="text-retro-blue font-bold">EXPERIENCE:</span> 10+ years of training and performance</p>
-              <p><span className="text-retro-blue font-bold">CURRENT FOCUS:</span> Choreography & Creative Direction</p>
+              <p className="mb-2"><span className="text-retro-blue font-bold">TRAINING:</span> Hip Hop, Jazz, Ballroom</p>
+              <p><span className="text-retro-blue font-bold">CURRENT FOCUS:</span> Choreography</p>
             </div>
           </div>
         </RetroWindow>
