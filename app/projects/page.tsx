@@ -2,61 +2,41 @@ import { projects } from "@/data/projects";
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen py-16 sm:py-24" style={{ backgroundColor: "#EAE0F5" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            My Projects
-          </h1>
-          <p className="mt-4 text-xl text-gray-500 max-w-2xl mx-auto">
-            A collection of work demonstrating my skills in Data Science and Product Design.
-          </p>
-        </div>
+    <div className="wrap pt-10">
+      <div className="mb-10">
+        <div className="eyebrow">Projects</div>
+        <h1 className="font-display font-black text-[clamp(36px,6vw,64px)] leading-none tracking-[-.01em] mt-2.5">
+          Discography
+        </h1>
+        <p className="mt-4 text-dim max-w-[52ch]">
+          A collection of work demonstrating my skills in Data Science and Product Design.
+        </p>
+      </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-          {projects.map((project) => (
-            <article
-              key={project.id}
-              className="flex flex-col overflow-hidden rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-                <div className="flex-1">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#FFD700] text-[#4A1B5C] font-bold border-2 border-[#9B6BBB]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <a href={project.link} className="block mt-2">
-                    <p className="text-xl font-semibold text-gray-900">
-                      {project.title}
-                    </p>
-                    <p className="mt-3 text-base text-gray-500">
-                      {project.description}
-                    </p>
-                  </a>
-                </div>
-                <div className="mt-6 flex items-center">
-                  <a
-                    href={project.link}
-                    className="text-base font-semibold text-blue-600 hover:text-blue-500"
-                  >
-                    View Project <span aria-hidden="true">&rarr;</span>
-                  </a>
-                </div>
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, i) => (
+          <article key={project.id} className="min-w-0 flex flex-col">
+            <div className={`cover cover-${i % 3}`}>
+              <h3>{project.title}</h3>
+            </div>
+            <div className="pt-4 flex-1 flex flex-col">
+              <div className="flex flex-wrap gap-2 mb-3">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="font-mono-ui text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-raise text-neon-cyan">
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </article>
-          ))}
-        </div>
+              <p className="text-dim text-[15px]">{project.description}</p>
+              {project.link !== "#" && (
+                <a href={project.link} className="mt-4 font-bold text-neon-pink hover:underline">
+                  View Project <span aria-hidden="true">&rarr;</span>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   );
 }
-
-
-
-

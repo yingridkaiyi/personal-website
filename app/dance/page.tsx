@@ -54,14 +54,15 @@ const danceItems: DanceItem[] = [
 
 export default function DancePage() {
   return (
-    <div className="min-h-screen p-4 sm:p-8 font-retro overflow-hidden relative py-16 sm:py-24" style={{ backgroundColor: "#EAE0F5" }}>
-      <div className="max-w-7xl mx-auto relative z-10">
+    <div className="wrap pt-10">
+      <div>
         {/* HEADER */}
-        <div className="mb-16 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-retro-blue drop-shadow-[4px_4px_0px_rgba(255,255,255,1)] mb-4">
-            Dance Portfolio
+        <div className="mb-10">
+          <div className="eyebrow">Dance</div>
+          <h1 className="font-display font-black text-[clamp(36px,6vw,64px)] leading-none tracking-[-.01em] mt-2.5 mb-4">
+            Dance <span className="neon">Portfolio</span>
           </h1>
-          <p className="text-xl md:text-2xl text-retro-darker bg-white/50 inline-block px-4 py-2">
+          <p className="text-dim max-w-[52ch]">
             Choreography, performances, and creative expression through movement.
           </p>
         </div>
@@ -70,13 +71,13 @@ export default function DancePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {danceItems.map((piece) => (
             <RetroWindow key={piece.id} title={piece.title}>
-              <div className="bg-white p-4 border border-retro-dark h-full">
+              <div className="h-full">
                 {piece.videoUrl ? (
                   <div className="w-full mb-4">
                     {piece.videoType === 'youtube' ? (
                       <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                         <iframe
-                          className="absolute top-0 left-0 w-full h-full border border-retro-dark"
+                          className="absolute top-0 left-0 w-full h-full border border-raise rounded-lg"
                           src={piece.videoUrl}
                           title={piece.title}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -99,7 +100,7 @@ export default function DancePage() {
                       </div>
                     ) : (
                       <video
-                        className="w-full border border-retro-dark bg-black"
+                        className="w-full border border-raise rounded-lg bg-black"
                         controls
                         controlsList="nodownload"
                       >
@@ -109,24 +110,24 @@ export default function DancePage() {
                     )}
                   </div>
                 ) : piece.imageUrl ? (
-                  <div className="w-full h-48 bg-retro-gray border border-retro-dark mb-4 flex items-center justify-center">
-                    <div className="text-center text-gray-500">
+                  <div className="w-full h-48 bg-raise border border-raise rounded-lg mb-4 flex items-center justify-center">
+                    <div className="text-center text-dim">
                       <p className="text-sm">[Photo placeholder]</p>
                       <p className="text-xs">{piece.title}</p>
                     </div>
                   </div>
                 ) : null}
-                <p className="text-base text-gray-800 mb-4 leading-relaxed">
+                <p className="text-base text-dim mb-4 leading-relaxed">
                   {piece.description}
                 </p>
                 <div className="flex gap-2 flex-wrap mb-3">
                   {piece.styles.map((style) => (
-                    <span key={style} className="px-2 py-1 bg-retro-pink text-white text-xs font-bold border border-retro-darker">
+                    <span key={style} className="genre !text-xs !px-3 !py-1">
                       {style}
                     </span>
                   ))}
                 </div>
-                <div className="text-sm text-retro-blue font-bold">
+                <div className="font-mono-ui text-sm text-neon-cyan">
                   {piece.date}
                 </div>
               </div>
@@ -136,23 +137,23 @@ export default function DancePage() {
 
         {/* ABOUT DANCE SECTION */}
         <RetroWindow title="About_My_Dance.txt" className="mb-12">
-          <div className="bg-white p-4 border border-retro-dark text-gray-800 leading-relaxed">
+          <div className="leading-relaxed">
             <p className="mb-4">
-              Dance has always been my creative outlet and way to express emotions that data can't quite capture. Through choreography, I explore movement, storytelling, and the connection between physicality and emotion.
+              Dance has always been my creative outlet and way to express emotions that data can&apos;t quite capture. Through choreography, I explore movement, storytelling, and the connection between physicality and emotion.
             </p>
             <p className="mb-4">
               Whether performing on stage or creating in the studio, dance keeps me grounded and reminds me that not everything needs to be quantified to be meaningful.
             </p>
-            <div className="mt-6 pt-6 border-t border-dashed border-gray-400">
-              <p className="mb-2"><span className="text-retro-blue font-bold">TRAINING:</span> Hip Hop, Jazz, Ballroom</p>
-              <p><span className="text-retro-blue font-bold">CURRENT FOCUS:</span> Choreography</p>
+            <div className="mt-6 pt-6 border-t border-raise">
+              <p className="mb-2"><span className="font-mono-ui text-xs uppercase tracking-widest text-neon-pink">TRAINING:</span> Hip Hop, Jazz, Ballroom</p>
+              <p><span className="font-mono-ui text-xs uppercase tracking-widest text-neon-pink">CURRENT FOCUS:</span> Choreography</p>
             </div>
           </div>
         </RetroWindow>
 
         {/* BACK BUTTON */}
-        <div className="text-center">
-          <Link href="/" className="inline-block bg-retro-gray border-2 border-t-retro-light border-l-retro-light border-b-retro-darker border-r-retro-darker px-6 py-2 text-lg font-bold text-black hover:bg-retro-light/80 active:border-t-retro-darker active:border-l-retro-darker active:border-b-retro-light active:border-r-retro-light">
+        <div>
+          <Link href="/" className="btn">
             ← Back to Home
           </Link>
         </div>

@@ -1,37 +1,179 @@
 @import "tailwindcss";
 
+/* Vinyl / neon theme: a streaming app at midnight. */
 :root {
-  --background: #F5D5E3; /* Dusty Rose */
-  --foreground: #000000;
+  /* "Tropical Rave" neon palette, pink-orange lead: coral main color + orange-to-pink gradient.
+     Orange lead before this: pink #ff6a00, violet #ff2daa.
+     Arcade Glow: ink #141414, panel #1f1f1f, raise #2b2b2b, text #f2f2f2, dim #a8a8a8,
+       pink #ff6a00, cyan #00ffd5, violet #7b2cff, gold #fff200
+     Electric Sakura: ink #1a1033, panel #251944, raise #302254, dim #a99cc4,
+       pink #ff2daa, cyan #00a3ff, violet #ff6a8a, gold #fff200
+     Original: ink #0b0a10, panel #16141f, raise #211e2d, text #f2eff8, dim #9a94ad,
+       pink #ff3fa4, cyan #3ff0ff, violet #8b5cff, gold #ffd23f */
+  --ink: #0d1b1e;
+  --panel: #142a2e;
+  --raise: #1d383d;
+  --text: #eef7f6;
+  --dim: #9fb8b8;
+  --pink: #ff6248;
+  --cyan: #00ffd5;
+  --violet: #ff3d7f;
+  --gold: #39ff14;
+  --accent-grad: linear-gradient(100deg, #ff8a3d, #ff3d7f);
+  --background: var(--ink);
+  --foreground: var(--text);
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-raise: var(--raise);
+  --color-text: var(--text);
+  --color-dim: var(--dim);
+  --color-neon-pink: var(--pink);
+  --color-neon-cyan: var(--cyan);
+  --color-neon-violet: var(--violet);
+  --color-neon-gold: var(--gold);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-space-mono);
+  --font-display: var(--font-oxanium);
 }
+
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--background);
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
-  background-size: 40px 40px;
-  color: var(--foreground);
-  font-family: var(--font-vt323), monospace;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  line-height: 1.55;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 12px;
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
-::-webkit-scrollbar-track {
-  background: #C0C0C0;
+
+.font-display { font-family: var(--font-oxanium), sans-serif; }
+.font-mono-ui { font-family: var(--font-space-mono), ui-monospace, monospace; }
+
+/* Shared pieces */
+.wrap { max-width: 1100px; margin: 0 auto; padding-inline: 16px; }
+.eyebrow { font-family: var(--font-space-mono), monospace; font-size: 13px; color: var(--cyan); letter-spacing: .14em; text-transform: uppercase; }
+.section { margin-top: 72px; }
+.section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.section-head h2 { font-family: var(--font-oxanium), sans-serif; font-weight: 800; font-size: clamp(26px, 4vw, 40px); margin: 0; letter-spacing: -.02em; }
+.section-head span { font-family: var(--font-space-mono), monospace; font-size: 13px; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; }
+.neon { color: var(--pink); background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 14px rgba(255,98,72,.55)) drop-shadow(0 0 32px rgba(255,61,127,.3)); }
+.panel { background: var(--panel); border-radius: 14px; }
+
+.btn { display: inline-block; font-weight: 700; font-size: 15px; padding: 12px 22px; border-radius: 999px; color: var(--text); border: 1.5px solid var(--raise); transition: border-color .2s, background .2s; }
+.btn:hover { border-color: var(--cyan); }
+.btn-play { background: var(--accent-grad); border-color: var(--pink); color: var(--ink); box-shadow: 0 0 24px rgba(255,98,72,.5); }
+.btn-play:hover { border-color: var(--pink); box-shadow: 0 0 34px rgba(255,98,72,.7); }
+
+/* Spinning record */
+.deck { position: relative; aspect-ratio: 1; max-width: 420px; width: 100%; justify-self: center; }
+.record { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0 8%, rgba(255,255,255,.09) 13%, transparent 18% 58%, rgba(255,255,255,.07) 63%, transparent 68%), repeating-radial-gradient(circle, #111 0 2px, #152427 2px 4px); box-shadow: 0 0 0 2px #1d383d, 0 0 60px rgba(0,255,213,.3); animation: spin 6s linear infinite; }
+.record-label { position: absolute; inset: 33%; border-radius: 50%; background: conic-gradient(from 20deg, var(--pink), var(--violet), var(--cyan), var(--pink)); display: grid; place-items: center; animation: spin 6s linear infinite; }
+.record-label span { background: var(--ink); width: 14%; aspect-ratio: 1; border-radius: 50%; }
+.record-label i { position: absolute; font-style: normal; font-family: var(--font-oxanium), sans-serif; font-weight: 800; font-size: clamp(11px, 2vw, 15px); color: var(--ink); top: 24%; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Chart rows */
+.chart-row { display: grid; grid-template-columns: 72px minmax(0,1fr) auto; gap: 18px; align-items: start; padding: 18px 22px; border-bottom: 1px solid var(--raise); }
+.chart-row:last-child { border-bottom: 0; }
+.chart-rank { font-family: var(--font-oxanium), sans-serif; font-weight: 800; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+.chart-row:first-child .chart-rank { color: var(--gold); text-shadow: 0 0 16px rgba(255,210,63,.5); }
+.chart-meta { font-family: var(--font-space-mono), monospace; font-size: 12px; color: var(--dim); text-align: right; white-space: nowrap; display: grid; gap: 4px; }
+.chart-row details summary { cursor: pointer; font-family: var(--font-space-mono), monospace; font-size: 12px; color: var(--cyan); margin-top: 8px; letter-spacing: .06em; text-transform: uppercase; }
+.chart-row details ul { margin: 10px 0 0; padding-left: 18px; color: var(--dim); font-size: 15px; display: grid; gap: 6px; list-style: disc; }
+
+/* Album covers */
+.cover { aspect-ratio: 1; max-width: 100%; border-radius: 10px; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 18px; }
+.cover h3 { font-family: var(--font-oxanium), sans-serif; font-weight: 800; font-size: clamp(18px, 2.4vw, 24px); line-height: 1.05; margin: 0; color: var(--ink); text-wrap: balance; position: relative; }
+.cover-0 { background: radial-gradient(circle at 75% 25%, var(--cyan) 0 18%, transparent 19%), linear-gradient(160deg, var(--pink), var(--violet)); }
+.cover-1 { background: repeating-linear-gradient(135deg, var(--gold) 0 14px, #2bc40f 14px 28px); }
+.cover-2 { background: radial-gradient(circle at 30% 30%, #fff 0 6%, transparent 7%), linear-gradient(200deg, var(--cyan), #00bfa0); }
+
+/* Genre chips */
+.genre { font-weight: 700; font-size: 14px; padding: 8px 16px; border-radius: 999px; background: var(--raise); }
+.genre:nth-child(5n+1) { background: var(--pink); color: var(--ink); }
+.genre:nth-child(7n+3) { background: var(--violet); color: var(--ink); }
+.genre:nth-child(6n+4) { background: var(--cyan); color: var(--ink); }
+
+/* Now playing bar */
+.eq { display: flex; gap: 3px; align-items: flex-end; height: 22px; }
+.eq i { width: 4px; background: var(--cyan); border-radius: 2px; animation: eq 1s ease-in-out infinite; }
+.eq i:nth-child(2) { animation-delay: -.3s; background: var(--pink); }
+.eq i:nth-child(3) { animation-delay: -.6s; }
+.eq i:nth-child(4) { animation-delay: -.15s; background: var(--violet); }
+@keyframes eq { 0%,100% { height: 30%; } 50% { height: 100%; } }
+
+/* Spotify-style playlist shortcuts */
+.shortcut { display: flex; align-items: center; gap: 12px; background: var(--raise); border-radius: 6px; overflow: hidden; padding-right: 10px; transition: background .2s; }
+.shortcut:hover, .shortcut:focus-visible { background: #24444a; }
+.shortcut-cover { width: 56px; height: 56px; flex: none; display: grid; place-items: center; font-family: var(--font-oxanium), sans-serif; font-weight: 800; font-size: 17px; color: var(--ink); box-shadow: 4px 0 14px rgba(0,0,0,.45); }
+.shortcut-title { display: block; font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.shortcut-sub { display: block; font-size: 12px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.shortcut-play { margin-left: auto; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-grad); color: var(--ink); display: grid; place-items: center; opacity: 0; transform: translateY(4px); transition: opacity .2s, transform .2s; box-shadow: 0 6px 16px rgba(0,0,0,.45), 0 0 16px rgba(255,98,72,.45); }
+.shortcut:hover .shortcut-play, .shortcut:focus-visible .shortcut-play { opacity: 1; transform: none; }
+.sc-pink { background: linear-gradient(135deg, var(--pink), var(--violet)); }
+.sc-cyan { background: linear-gradient(135deg, var(--cyan), #00bfa0); }
+.sc-gold { background: repeating-linear-gradient(135deg, var(--gold) 0 8px, #2bc40f 8px 16px); }
+.sc-violet { background: linear-gradient(135deg, var(--violet), var(--cyan)); }
+@media (hover: none) { .shortcut-play { opacity: 1; transform: none; } }
+@media (max-width: 480px) { .shortcut { gap: 10px; } .shortcut-cover { width: 48px; height: 48px; font-size: 15px; } .shortcut-play { display: none; } }
+
+/* Hero as a festival lineup poster */
+.poster-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-family: var(--font-space-mono), monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.verified { display: inline-flex; align-items: center; gap: 6px; color: var(--cyan); font-weight: 700; }
+.verified svg { flex: none; }
+.lineup-kicker { margin: 22px 0 0; font-family: var(--font-space-mono), monospace; font-size: 13px; letter-spacing: .5em; text-transform: uppercase; color: var(--gold); }
+.headliner { font-family: var(--font-oxanium), sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(54px, 9.6vw, 118px); line-height: .88; letter-spacing: .01em; margin: 6px 0 -.08em; }
+.headliner .outline { color: transparent; -webkit-text-stroke: 2px var(--text); }
+.lineup { margin-top: 40px; padding: 26px 0 28px; border-top: 1px solid var(--raise); border-bottom: 1px solid var(--raise); text-align: center; }
+.lineup .lineup-kicker { margin: 0 0 14px; }
+.lineup-tier { display: flex; flex-wrap: wrap; justify-content: center; font-family: var(--font-oxanium), sans-serif; text-transform: uppercase; line-height: 1.25; }
+.lineup-tier span { white-space: nowrap; }
+.lineup-tier i { font-style: normal; color: var(--cyan); margin: 0 .45em; }
+.tier-1 { font-weight: 800; font-size: clamp(24px, 3.6vw, 44px); letter-spacing: .02em; }
+.tier-2 { font-weight: 700; font-size: clamp(16px, 2vw, 24px); letter-spacing: .03em; margin-top: 8px; color: var(--text); }
+.tier-3 { font-weight: 600; font-size: clamp(13px, 1.4vw, 16px); letter-spacing: .08em; margin-top: 8px; color: var(--dim); }
+.tier-2 i { color: var(--pink); }
+.tier-3 i { color: var(--gold); }
+
+/* Spotify record: album art on the label, sound toggle under it */
+.record-label { overflow: hidden; }
+.record-art { object-fit: cover; border-radius: 50%; }
+.record-label span { position: relative; z-index: 1; }
+.deck.is-playing .record { animation-duration: 2.4s; box-shadow: 0 0 0 2px #1d383d, 0 0 70px rgba(255,98,72,.45); }
+.deck.is-playing .record-label { animation-duration: 2.4s; }
+.now-spinning { display: flex; align-items: center; gap: 14px; width: 100%; background: var(--panel); border-radius: 12px; padding: 12px 14px; }
+.sound-toggle { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px; padding: 8px 14px; border-radius: 999px; background: var(--accent-grad); color: var(--ink); cursor: pointer; }
+.sound-toggle[aria-pressed="true"] { background: var(--cyan); }
+.sound-toggle:disabled { opacity: .5; cursor: wait; }
+.spotify-embed { position: absolute; left: -9999px; top: 0; width: 300px; height: 80px; overflow: hidden; }
+
+@media (max-width: 760px) {
+  .deck { max-width: 240px; }
+  .chart-row { grid-template-columns: 52px minmax(0,1fr); }
+  .chart-rank { font-size: 30px; }
+  .chart-meta { grid-column: 2; text-align: left; }
 }
-::-webkit-scrollbar-thumb {
-  background: #808080;
-  border: 2px solid #C0C0C0;
-  border-top-color: #DFDFDF;
-  border-left-color: #DFDFDF;
+
+@media (prefers-reduced-motion: reduce) {
+  .record, .record-label, .eq i { animation: none; }
+  html { scroll-behavior: auto; }
 }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--raise); border-radius: 10px; }
+
+/* Company logos, tinted with the neon gradient */
+.logo-tile { flex: none; border-radius: 8px; background: var(--raise); display: grid; place-items: center; overflow: hidden; box-shadow: 0 0 0 1px #1d383d; }
+.logo-mark { width: 74%; height: 74%; background: linear-gradient(135deg, var(--pink), var(--violet) 55%, var(--cyan)); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+.logo-initials { background: linear-gradient(135deg, var(--pink), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
