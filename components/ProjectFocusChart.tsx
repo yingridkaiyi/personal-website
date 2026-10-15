@@ -3,10 +3,10 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
 const data = [
-  { name: "Machine Learning", value: 35, color: "#CF6DFC" }, // lf-purple
-  { name: "Data Engineering", value: 25, color: "#C1BFFF" }, // lf-lavender
-  { name: "Product Analytics", value: 25, color: "#BDB96A" }, // lf-green
-  { name: "Visualization", value: 15, color: "#7a7742" }, // lf-dark-green
+  { name: "Machine Learning", value: 35, color: "#ff6248" }, // coral
+  { name: "Data Engineering", value: 25, color: "#00ffd5" }, // aqua
+  { name: "Product Analytics", value: 25, color: "#ff3d7f" }, // pink
+  { name: "Visualization", value: 15, color: "#39ff14" }, // lime
 ];
 
 export default function ProjectFocusChart() {
@@ -28,10 +28,10 @@ export default function ProjectFocusChart() {
             ))}
           </Pie>
           <Tooltip 
-            contentStyle={{ borderRadius: '12px', border: 'none', backgroundColor: '#FDFBD4', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-            itemStyle={{ color: '#4a4a4a' }}
+            contentStyle={{ borderRadius: '10px', border: '1px solid var(--raise)', backgroundColor: 'var(--ink)' }}
+            itemStyle={{ color: 'var(--text)' }}
           />
-          <Legend verticalAlign="bottom" height={36} iconType="circle" />
+          <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ color: 'var(--dim)', fontSize: 13 }} />
         </PieChart>
       </ResponsiveContainer>
     </div>
