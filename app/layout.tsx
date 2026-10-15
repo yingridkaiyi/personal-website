@@ -23,8 +23,17 @@ const oxanium = Oxanium({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ingrid-yeung.com"),
   title: "Ingrid's personal website",
   description: "Ingrid Yeung: data science and analytics for music, live entertainment and product.",
+  openGraph: {
+    title: "Ingrid Yeung",
+    description: "Verified Data Enthusiast · Statistics & Data Science, Northwestern '27",
+    url: "https://ingrid-yeung.com",
+    siteName: "Ingrid Yeung",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
   icons: {
     icon: "/favicon.svg",
   },
