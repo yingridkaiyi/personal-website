@@ -20,9 +20,20 @@ interface SpotifyTrack {
 
 const REVALIDATE_SECONDS = 60 * 60;
 
+// Tolerates values pasted into a host's dashboard with stray spaces or quotes.
+function env(name: string) {
+  return process.env[name]?.trim().replace(/^["']|["']$/g, "") || undefined;
+}
+
 async function getAccessToken() {
-  const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
-  if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) return null;
+  const SPOTIFY_CLIENT_ID = env("SPOTIFY_CLIENT_ID");
+  const SPOTIFY_CLIENT_SECRET = env("SPOTIFY_CLIENT_SECRET");
+  const SPOTIFY_REFRESH_TOKEN = env("SPOTIFY_REFRESH_TOKEN");
+  if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
+    const missing = ["SPOTIFY_CLIENT_ID", "SPOTIFY_CLIENT_SECRET", "SPOTIFY_REFRESH_TOKEN"].filter((n) => !env(n));
+    console.error(`[spotify] missing env: ${missing.join(", ")}`);
+    return null;
+  }
 
   const res = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
@@ -33,8 +44,11 @@ async function getAccessToken() {
     body: new URLSearchParams({ grant_type: "refresh_token", refresh_token: SPOTIFY_REFRESH_TOKEN }),
     next: { revalidate: REVALIDATE_SECONDS },
   });
-  if (!res.ok) return null;
-  const data = await res.json();
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    console.error(`[spotify] token refresh failed: ${res.status} ${data.error ?? ""} ${data.error_description ?? ""}`);
+    return null;
+  }
   return data.access_token ?? null;
 }
 
@@ -58,10 +72,14 @@ export async function getOnRepeatSong() {
       headers: { Authorization: `Bearer ${token}` },
       next: { revalidate: REVALIDATE_SECONDS },
     });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error(`[spotify] top tracks request failed: ${res.status}`);
+      return null;
+    }
     const data: { items: SpotifyTrack[] } = await res.json();
     return data.items[0] ? toTopSong(data.items[0]) : null;
-  } catch {
+  } catch (err) {
+    console.error("[spotify] request error:", err instanceof Error ? err.message : err);
     return null;
   }
 }
